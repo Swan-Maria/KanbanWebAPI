@@ -20,6 +20,11 @@ internal class GenericRepository<T> : IGenericRepository<T> where T : class
 
     public async Task<T> CreateAsync(T entity)
     {
+        if (entity == null)
+        {
+            throw new ArgumentNullException(nameof(entity));
+        }
+        
         _dbSet.Add(entity);
         await _context.SaveChangesAsync();
         return entity;

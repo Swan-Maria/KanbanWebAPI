@@ -3,12 +3,12 @@ REST API for a Kanban task management system. Allows creating teams, boards, col
 The backend is written in ASP.NET Core 9 using Entity Framework and PostgreSQL. Authentication is via Google OAuth 2.0.
 ---
 ## Team Members
-| Member              | Role                           | Responsibility                | Git Hub    |
-|---------------------|--------------------------------|-------------------------------|------------|
-| Maria Lebedeva      | Team Lead / QA / Documentation | Testing & Quality Assurance   | @SwanMaria |
-| Daria Burtseva      | Backend programmer             | Data Access Layer && Database | @dasha-tg  |
-| Yevgeniy Zadorozhny | Backend programmer             | Bisness Logic Layer           |            |
-| Ivan Nikolaev       | Backend programmer             | WebApi (Presentation Layer)   |            |
+| Member              | Responsibility                 |
+|---------------------|--------------------------------|
+| Maria Lebedeva      | Testing & Quality Assurance    |
+| Daria Burtseva      | Data Access Layer && Database  | 
+| Yevgeniy Zadorozhny | Bisness Logic Layer            |        
+| Ivan Nikolaev       | WebApi (Presentation Layer)    |       
 ---
 ## Features
 - Authorization via Google OAuth 2.0
@@ -44,6 +44,4 @@ The project is implemented using a multi-layer architecture using Entity Framewo
 - `Task` — task
 - `TaskAssignment` — task assignee
 - `TaskHistory` — change history
-![Kanban database entities](kanban_graph.jpg)
-
----
+<!-- ![Kanban database entities](kanban_graph.jpg) -->
