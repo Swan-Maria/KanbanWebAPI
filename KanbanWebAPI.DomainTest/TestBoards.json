@@ -1,0 +1,29 @@
+[
+  {
+    "BoardId": "00000000-0000-0000-0000-000000000101",
+    "BoardName": "Project Alpha",
+    "BoardDescription": null,
+    "TeamId": "00000000-0000-0000-0000-000000000001",
+    "Columns": [
+      {
+        "ColumnId": "00000000-0000-0000-0000-000000000001",
+        "ColumnName": "To Do",
+        "BoardId": "00000000-0000-0000-0000-000000000101"
+      }
+    ]
+  },
+  {
+    "BoardId": "00000000-0000-0000-0000-000000000102",
+    "BoardName": "Project Beta",
+    "BoardDescription": null,
+    "TeamId": "00000000-0000-0000-0000-000000000001",
+    "Columns": []
+  },
+  {
+    "BoardId": "00000000-0000-0000-0000-000000000103",
+    "BoardName": "Project Gamma",
+    "BoardDescription": null,
+    "TeamId": "00000000-0000-0000-0000-000000000002",
+    "Columns": []
+  }
+]

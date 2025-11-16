@@ -1,10 +1,10 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi", "WebApi\WebApi.csproj", "{DA0A134C-EE48-401B-85E7-FE47FB918D33}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KanbanWebAPI.WebApi", "KanbanWebAPI.WebApi\KanbanWebAPI.WebApi.csproj", "{DA0A134C-EE48-401B-85E7-FE47FB918D33}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{F5C822F2-5B6B-4A7B-A1FF-3A4874ED8FF1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KanbanWebAPI.Domain", "KanbanWebAPI.Domain\KanbanWebAPI.Domain.csproj", "{F5C822F2-5B6B-4A7B-A1FF-3A4874ED8FF1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomainTest", "DomainTest\DomainTest.csproj", "{0A770422-ECBB-4B9A-8AAC-B6DE79031E78}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KanbanWebAPI.DomainTest", "KanbanWebAPI.DomainTest\KanbanWebAPI.DomainTest.csproj", "{0A770422-ECBB-4B9A-8AAC-B6DE79031E78}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
