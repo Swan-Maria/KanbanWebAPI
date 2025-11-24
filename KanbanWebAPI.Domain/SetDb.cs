@@ -13,7 +13,7 @@ public static class SetDb
         var random = new Random();
 
         // users
-        if (!context.Users.Any())
+        if (!context.User.Any())
         {
             var users = new Faker<User>()
                 .RuleFor(u => u.UserId, f => Guid.NewGuid())
@@ -21,28 +21,28 @@ public static class SetDb
                 .RuleFor(u => u.Email, f => f.Internet.Email())
                 .Generate(10);
 
-            context.Users.AddRange(users);
+            context.User.AddRange(users);
             context.SaveChanges();
         }
 
-        var allUsers = context.Users.ToList();
+        var allUsers = context.User.ToList();
 
         // teams
-        if (!context.Teams.Any())
+        if (!context.Team.Any())
         {
             var teams = new Faker<Team>()
                 .RuleFor(t => t.TeamId, f => Guid.NewGuid())
                 .RuleFor(t => t.TeamName, f => f.Company.CompanyName())
                 .Generate(3);
 
-            context.Teams.AddRange(teams);
+            context.Team.AddRange(teams);
             context.SaveChanges();
         }
 
-        var allTeams = context.Teams.ToList();
+        var allTeams = context.Team.ToList();
 
         // boards
-        if (!context.Boards.Any())
+        if (!context.Board.Any())
         {
             var boards = new Faker<Board>()
                 .RuleFor(b => b.BoardId, f => Guid.NewGuid())
@@ -50,14 +50,14 @@ public static class SetDb
                 .RuleFor(b => b.TeamId, f => f.PickRandom(allTeams).TeamId)
                 .Generate(5);
 
-            context.Boards.AddRange(boards);
+            context.Board.AddRange(boards);
             context.SaveChanges();
         }
 
-        var allBoards = context.Boards.Include(b => b.Columns).ToList();
+        var allBoards = context.Board.Include(b => b.Columns).ToList();
 
         // columns
-        if (!context.Columns.Any())
+        if (!context.Column.Any())
         {
             var columnNames = new[] { "To Do", "In Progress", "Review", "Done" };
             var columns = new List<Column>();
@@ -84,17 +84,17 @@ public static class SetDb
                 }
             }
 
-            context.Columns.AddRange(columns);
+            context.Column.AddRange(columns);
             context.SaveChanges();
         }
 
-        var allColumns = context.Columns.ToList();
+        var allColumns = context.Column.ToList();
         var backlogColumns = allColumns.Where(c => c.ColumnName == "Backlog").ToList();
         var optionalColumns = allColumns.Where(c => c.ColumnName != "Backlog").ToList();
 
 
         // tasks
-        if (!context.Tasks.Any())
+        if (!context.Task.Any())
         {
             // All tasks create at Backlog
             var tasks = new Faker<TaskItem>()
@@ -104,7 +104,7 @@ public static class SetDb
                 .RuleFor(t => t.ColumnId, f => f.PickRandom(backlogColumns).ColumnId)
                 .Generate(20);
 
-            context.Tasks.AddRange(tasks);
+            context.Task.AddRange(tasks);
             context.SaveChanges();
 
             // task assignment
@@ -124,13 +124,13 @@ public static class SetDb
             // task audit (history)
             var audits = new Faker<TaskAudit>()
                 .RuleFor(a => a.AuditId, f => Guid.NewGuid())
-                .RuleFor(a => a.TaskId, f => f.PickRandom(tasks).TaskId)
-                .RuleFor(a => a.ChangeDescription, f => f.Lorem.Sentence())
-                .RuleFor(a => a.ChangedAt, f => f.Date.Past(1))
-                .RuleFor(a => a.ChengedByUserId, f => f.PickRandom(allUsers).UserId)
+                .RuleFor(a => a.TaskItemId, f => f.PickRandom(tasks).TaskId)
+                .RuleFor(a => a.Action, f => f.Lorem.Sentence())
+                .RuleFor(a => a.CreateAt, f => f.Date.Past(1))
+                .RuleFor(a => a.CreateByUserId, f => f.PickRandom(allUsers).UserId)
                 .Generate(20);
 
-            context.TaskAudits.AddRange(audits);
+            context.TaskAudit.AddRange(audits);
             context.SaveChanges();
 
             // Random remove tasks from Backlog to optional columns

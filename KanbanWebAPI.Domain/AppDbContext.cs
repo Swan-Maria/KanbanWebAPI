@@ -6,12 +6,12 @@ namespace KanbanWebAPI.Domain;
 
 public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
 {
-    public DbSet<User> Users { get; set; }
-    public DbSet<Team> Teams { get; set; }
-    public DbSet<Board> Boards { get; set; }
-    public DbSet<Column> Columns { get; set; }
-    public DbSet<TaskItem> Tasks { get; set; }
-    public DbSet<TaskAudit> TaskAudits { get; set; }
+    public DbSet<User> User { get; set; }
+    public DbSet<Team> Team { get; set; }
+    public DbSet<Board> Board { get; set; }
+    public DbSet<Column> Column { get; set; }
+    public DbSet<TaskItem> Task { get; set; }
+    public DbSet<TaskAudit> TaskAudit { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

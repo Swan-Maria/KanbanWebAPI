@@ -23,7 +23,7 @@ namespace KanbanWebAPI.Domain.Entities.Configurations
 
             builder.HasMany(x => x.Users)
                 .WithMany(x => x.Tasks)
-                .UsingEntity(j => j.ToTable("TaskAssignments"));
+                .UsingEntity(j => j.ToTable("TaskAssignment"));
         }
     }
 }

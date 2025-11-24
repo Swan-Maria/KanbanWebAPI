@@ -42,7 +42,7 @@ public class TaskItemRepositoryBaseTest
         _context = new AppDbContext(options);
         _taskItemRepositoryBase = new TaskItemRepositoryBase(_context);
 
-        _context.Tasks.AddRange(InitialTasks.Select(t => new TaskItem
+        _context.Task.AddRange(InitialTasks.Select(t => new TaskItem
         {
             TaskId = t.TaskId,
             ColumnId = t.ColumnId,

@@ -14,12 +14,12 @@ internal class UserRepositoryBase(AppDbContext context) : RepositoryBase<User>(c
 {
     public async Task<User?> GetByEmailAsync(string email)
     {
-        return await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
+        return await _context.User.FirstOrDefaultAsync(u => u.Email == email);
     }
 
     public async Task<IEnumerable<User>> GetUsersByTeamAsync(Guid teamId)
     {
-        return await _context.Users
+        return await _context.User
             .Where(u => u.Teams.Any(t => t.TeamId == teamId))
             .ToListAsync();
     }

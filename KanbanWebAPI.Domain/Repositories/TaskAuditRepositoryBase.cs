@@ -6,16 +6,16 @@ namespace KanbanWebAPI.Domain.Repositories;
 
 public interface ITaskAuditRepository : IRepositoryBase<TaskAudit>
 {
-    Task<IEnumerable<TaskAudit>> GetByTaskIdAsync(Guid taskId);
+    Task<IEnumerable<TaskAudit>> GetByTaskIdAsync(Guid taskItemId);
 }
 
 internal class TaskAuditRepositoryBase(AppDbContext context) : RepositoryBase<TaskAudit>(context), ITaskAuditRepository
 {
-    public async Task<IEnumerable<TaskAudit>> GetByTaskIdAsync(Guid taskId)
+    public async Task<IEnumerable<TaskAudit>> GetByTaskIdAsync(Guid taskItemId)
     {
-        return await _context.TaskAudits
-            .Where(a => a.TaskId == taskId)
-            .OrderByDescending(a => a.ChangedAt)
+        return await _context.TaskAudit
+            .Where(a => a.TaskItemId == taskItemId)
+            .OrderByDescending(a => a.CreateAt)
             .ToListAsync();
     }
 }

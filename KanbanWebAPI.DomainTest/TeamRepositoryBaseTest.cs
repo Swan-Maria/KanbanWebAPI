@@ -43,7 +43,7 @@ public class TeamRepositoryBaseTest
         _context = new AppDbContext(options);
         _teamRepositoryBase = new TeamRepositoryBase(_context);
 
-        _context.Teams.AddRange(InitialTeams);
+        _context.Team.AddRange(InitialTeams);
         _context.SaveChanges();
     }
 

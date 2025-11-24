@@ -3,7 +3,7 @@
 public class User
 {
     public Guid UserId { get; set; }
-    public string GoogleId { get; set; } = null!;
+    public string GoogleId { get; init; } = null!;
     public string Username { get; set; } = null!;
     public string Email { get; set; } = null!;
     public IReadOnlyCollection<Team> Teams { get; set; } = new List<Team>();

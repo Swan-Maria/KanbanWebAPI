@@ -2,7 +2,7 @@
 
 public class Column
 {
-    public Guid ColumnId { get; set; }
+    public Guid ColumnId { get; init; }
     public string ColumnName { get; set; } = null!;
     public Guid BoardId { get; set; }
     public Board Board { get; set; } = null!;

@@ -2,11 +2,11 @@
 
 public class TaskAudit
 {
-    public Guid AuditId { get; set; }
-    public Guid TaskId { get; set; }
+    public Guid AuditId { get; init; }
+    public Guid TaskItemId { get; set; }
     public TaskItem TaskItem { get; set; } = null!;
-    public string ChangeDescription { get; set; } = null!;
-    public DateTime ChangedAt { get; set; } = DateTime.UtcNow;
-    public Guid ChengedByUserId { get; set; }
-    public User ChengedByUser { get; set; } = null!;
+    public string Action { get; set; } = null!;
+    public DateTime CreateAt { get; set; } = DateTime.UtcNow;
+    public Guid CreateByUserId { get; set; }
+    public User CreateByUser { get; set; } = null!;
 }

@@ -2,7 +2,7 @@
 
 public class Board
 {
-    public Guid BoardId { get; set; }
+    public Guid BoardId { get; init; }
     public string BoardName { get; set; } = null!;
     public string? BoardDescription { get; set; }
     public Guid TeamId { get; set; }

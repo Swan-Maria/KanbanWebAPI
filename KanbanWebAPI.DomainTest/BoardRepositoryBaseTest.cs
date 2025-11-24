@@ -41,7 +41,7 @@ public class BoardRepositoryBaseTests
             .Options;
 
         _context = new AppDbContext(options);
-        _context.Boards.AddRange(InitialBoards);
+        _context.Board.AddRange(InitialBoards);
         _context.SaveChanges();
 
         _boardRepositoryBase = new BoardRepositoryBase(_context);
@@ -126,7 +126,7 @@ public class BoardRepositoryBaseTests
         {
             // Act
             await _boardRepositoryBase.CreateAsync(board!);
-            var savedBoard = await _context.Boards.FindAsync(board!.BoardId);
+            var savedBoard = await _context.Board.FindAsync(board!.BoardId);
 
             // Assert (1 assert)
             Assert.That(savedBoard!.BoardName, Is.EqualTo(boardName),
@@ -148,7 +148,7 @@ public class BoardRepositoryBaseTests
 
         if (expectedExceptionType == null)
         {
-            boardToUpdate = _context.Boards.First(b => b.BoardId == boardId);
+            boardToUpdate = _context.Board.First(b => b.BoardId == boardId);
             boardToUpdate.BoardName = newName!;
         }
         else
@@ -165,7 +165,7 @@ public class BoardRepositoryBaseTests
         {
             // Act
             await _boardRepositoryBase.UpdateAsync(boardToUpdate);
-            var updated = await _context.Boards.AsNoTracking().FirstOrDefaultAsync(b => b.BoardId == boardId);
+            var updated = await _context.Board.AsNoTracking().FirstOrDefaultAsync(b => b.BoardId == boardId);
 
             // Assert
             Assert.That(updated!.BoardName, Is.EqualTo(newName), "The board name was not updated correctly.");
@@ -185,7 +185,7 @@ public class BoardRepositoryBaseTests
 
         // Act
         await _boardRepositoryBase.DeleteByIdAsync(boardIdToDelete);
-        var deleted = await _context.Boards.FindAsync(boardIdToDelete);
+        var deleted = await _context.Board.FindAsync(boardIdToDelete);
 
         // Assert 
         Assert.That(deleted, Is.Null,

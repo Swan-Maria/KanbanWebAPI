@@ -42,7 +42,7 @@ public class ColumnRepositoryBaseTest
         _context = new AppDbContext(options);
         _columnRepositoryBase = new ColumnRepositoryBase(_context);
 
-        _context.Columns.AddRange(InitialColumns.Select(c => new Column
+        _context.Column.AddRange(InitialColumns.Select(c => new Column
         {
             ColumnId = c.ColumnId,
             BoardId = c.BoardId,

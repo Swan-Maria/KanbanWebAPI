@@ -14,13 +14,13 @@ internal class BoardRepositoryBase(AppDbContext context) : RepositoryBase<Board>
 {
     public async Task<Board?> GetByNameAsync(string boardName)
     {
-        return await _context.Boards
+        return await _context.Board
             .FirstOrDefaultAsync(b => b.BoardName == boardName);
     }
 
     public async Task<IEnumerable<Board>> GetByTeamIdAsync(Guid teamId)
     {
-        return await _context.Boards
+        return await _context.Board
             .Where(b => b.TeamId == teamId)
             .ToListAsync();
     }

@@ -42,13 +42,13 @@ public class TaskAuditRepositoryBaseTest
         _context = new AppDbContext(options);
         _taskAuditRepositoryBase = new TaskAuditRepositoryBase(_context);
 
-        _context.TaskAudits.AddRange(InitialAudits.Select(a => new TaskAudit
+        _context.TaskAudit.AddRange(InitialAudits.Select(a => new TaskAudit
         {
             AuditId = a.AuditId,
-            TaskId = a.TaskId,
-            ChangeDescription = a.ChangeDescription,
-            ChangedAt = a.ChangedAt,
-            ChengedByUserId = a.ChengedByUserId
+            TaskItemId = a.TaskItemId,
+            Action = a.Action,
+            CreateAt = a.CreateAt,
+            CreateByUserId = a.CreateByUserId
         }));
 
         _context.SaveChanges();
@@ -89,11 +89,11 @@ public class TaskAuditRepositoryBaseTest
         else
         {
             Assert.That(resultList.Count(), Is.EqualTo(expectedCount));
-            Assert.That(resultList.All(a => a.TaskId == taskId), Is.True);
+            Assert.That(resultList.All(a => a.TaskItemId == taskId), Is.True);
 
             if (checkOrder)
             {
-                Assert.That(resultList, Is.Ordered.Descending.By(nameof(TaskAudit.ChangedAt)));
+                Assert.That(resultList, Is.Ordered.Descending.By(nameof(TaskAudit.CreateAt)));
             }
         }
     }

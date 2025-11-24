@@ -14,7 +14,7 @@ internal class TeamRepositoryBase(AppDbContext context) : RepositoryBase<Team>(c
 
     public async Task<IEnumerable<Team>> GetTeamsByUserAsync(Guid userId)
     {
-        return await _context.Teams
+        return await _context.Team
             .Where(t => t.Users.Any(u => u.UserId == userId))
             .ToListAsync();
     }

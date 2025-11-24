@@ -9,21 +9,21 @@ namespace KanbanWebAPI.Domain.Entities.Configurations
         {
             builder.HasKey(x => x.AuditId);
 
-            builder.Property(x => x.ChangeDescription)
+            builder.Property(x => x.Action)
                 .HasMaxLength(500)
                 .IsRequired();
 
-            builder.Property(x => x.ChangedAt)
+            builder.Property(x => x.CreateAt)
                 .IsRequired();
 
             builder.HasOne(x => x.TaskItem)
                 .WithMany()
-                .HasForeignKey(x => x.TaskId)
+                .HasForeignKey(x => x.TaskItemId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            builder.HasOne(x => x.ChengedByUser)
+            builder.HasOne(x => x.CreateByUser)
                 .WithMany()
-                .HasForeignKey(x => x.ChengedByUserId)
+                .HasForeignKey(x => x.CreateByUserId)
                 .OnDelete(DeleteBehavior.Restrict);
         }
     }

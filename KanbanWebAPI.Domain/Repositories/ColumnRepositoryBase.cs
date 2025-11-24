@@ -13,7 +13,7 @@ internal class ColumnRepositoryBase(AppDbContext context) : RepositoryBase<Colum
 {
     public async Task<IEnumerable<Column>> GetByBoardIdAsync(Guid boardId)
     {
-        return await _context.Columns
+        return await _context.Column
             .Include(c => c.Tasks)
             .Where(c => c.BoardId == boardId)
             .ToListAsync();

@@ -44,7 +44,7 @@ public class UserRepositoryBaseTest
         _context = new AppDbContext(options);
         _userRepositoryBase = new UserRepositoryBase(_context);
 
-        _context.Teams.AddRange(InitialTeams);
+        _context.Team.AddRange(InitialTeams);
         _context.SaveChanges();
     }
 

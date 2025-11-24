@@ -1,23 +1,23 @@
 ﻿[
   {
     "AuditId": "00000000-0000-0000-0000-000000000001",
-    "TaskId": "00000000-0000-0000-0000-000000000100",
-    "ChangeDescription": "Created task",
-    "ChangedAt": "2025-10-20T10:00:00Z",
-    "ChengedByUserId": "00000000-0000-0000-0000-00000000000a"
+    "TaskItemId": "00000000-0000-0000-0000-000000000100",
+    "Action": "Created task",
+    "CreateAt": "2025-10-20T10:00:00Z",
+    "CreateByUserId": "00000000-0000-0000-0000-00000000000a"
   },
   {
     "AuditId": "00000000-0000-0000-0000-000000000002",
-    "TaskId": "00000000-0000-0000-0000-000000000100",
-    "ChangeDescription": "Updated description",
-    "ChangedAt": "2025-10-20T10:10:00Z",
-    "ChengedByUserId": "00000000-0000-0000-0000-00000000000b"
+    "TaskItemId": "00000000-0000-0000-0000-000000000100",
+    "Action": "Updated description",
+    "CreateAt": "2025-10-20T10:10:00Z",
+    "CreateByUserId": "00000000-0000-0000-0000-00000000000b"
   },
   {
     "AuditId": "00000000-0000-0000-0000-000000000003",
-    "TaskId": "00000000-0000-0000-0000-000000000200",
-    "ChangeDescription": "Task moved to Done",
-    "ChangedAt": "2025-10-20T10:05:00Z",
-    "ChengedByUserId": "00000000-0000-0000-0000-00000000000c"
+    "TaskItemId": "00000000-0000-0000-0000-000000000200",
+    "Action": "Task moved to Done",
+    "CreateAt": "2025-10-20T10:05:00Z",
+    "CreateByUserId": "00000000-0000-0000-0000-00000000000c"
   }
 ]
