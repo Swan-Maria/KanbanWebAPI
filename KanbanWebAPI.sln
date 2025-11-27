@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KanbanWebAPI.Domain", "Kanb
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KanbanWebAPI.DomainTest", "KanbanWebAPI.DomainTest\KanbanWebAPI.DomainTest.csproj", "{0A770422-ECBB-4B9A-8AAC-B6DE79031E78}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KanbanWebAPI.Application", "KanbanWebAPI.Application\KanbanWebAPI.Application.csproj", "{B1234567-89AB-4CDE-F012-3456789ABCDE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
