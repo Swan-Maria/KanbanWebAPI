@@ -1,13 +1,18 @@
 using KanbanWebAPI.Application;
+using KanbanWebAPI.Application.Mapping;
 using KanbanWebAPI.Application.Interfaces.Services;
+using KanbanWebAPI.Application.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddOpenApi();
 
-// Connect Application via extension-method
+// Connect Application-layer via extension-method
 builder.Services.AddApplicationLayer();
+
+// Register AutoMapper with KanbanProfile
+builder.Services.AddAutoMapper(typeof(KanbanProfile).Assembly);
 
 var app = builder.Build();
 
