@@ -1,8 +1,26 @@
+using KanbanWebAPI.Application.Mapping;
+using KanbanWebAPI.Application.Interfaces.Services;
+using KanbanWebAPI.Application.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+
+// Connecting AutoMapper from your Application layer
+builder.Services.AddAutoMapper(typeof(KanbanProfile).Assembly);
+
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<ITeamService, TeamService>();
+builder.Services.AddScoped<IBoardService, BoardService>();
+builder.Services.AddScoped<IColumnService, ColumnService>();
+builder.Services.AddScoped<ITaskService, TaskService>();
+builder.Services.AddScoped<ITaskAssignmentService, TaskAssignmentService>();
+builder.Services.AddScoped<ICommentService, CommentService>();
+builder.Services.AddScoped<ITagService, TagService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<ITaskAuditService, TaskAuditService>();
 
 var app = builder.Build();
 
@@ -16,7 +34,8 @@ app.UseHttpsRedirection();
 
 var summaries = new[]
 {
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+    "Freezing", "Bracing", "Chilly", "Cool", "Mild",
+    "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
 };
 
 app.MapGet("/weatherforecast", () =>
