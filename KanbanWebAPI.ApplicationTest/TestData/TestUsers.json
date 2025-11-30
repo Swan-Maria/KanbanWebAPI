@@ -1,0 +1,14 @@
+[
+  {
+    "UserId": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+    "GoogleId": "google-111",
+    "Username": "User A",
+    "Email": "a@example.com"
+  },
+  {
+    "UserId": "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+    "GoogleId": "google-222",
+    "Username": "User B",
+    "Email": "b@example.com"
+  }
+]
