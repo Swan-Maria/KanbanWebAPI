@@ -107,20 +107,6 @@ public static class SetDb
             context.Task.AddRange(tasks);
             context.SaveChanges();
 
-            // task assignment
-            foreach (var task in tasks)
-            {
-                var assignedUsers = allUsers.OrderBy(u => Guid.NewGuid())
-                    .Take(random.Next(1, 4))
-                    .ToList();
-
-                foreach (var user in assignedUsers)
-                {
-                    task.Users.Add(user);
-                }
-            }
-            context.SaveChanges();
-
             // task audit (history)
             var audits = new Faker<TaskAudit>()
                 .RuleFor(a => a.AuditId, f => Guid.NewGuid())

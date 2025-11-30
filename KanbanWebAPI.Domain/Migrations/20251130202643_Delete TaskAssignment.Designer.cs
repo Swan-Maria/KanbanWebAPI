@@ -3,6 +3,7 @@ using System;
 using KanbanWebAPI.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace KanbanWebAPI.Domain.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251130202643_Delete TaskAssignment")]
+    partial class DeleteTaskAssignment
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -176,6 +179,21 @@ namespace KanbanWebAPI.Domain.Migrations
                     b.ToTable("User");
                 });
 
+            modelBuilder.Entity("TaskItemUser", b =>
+                {
+                    b.Property<Guid>("TasksTaskId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("UsersUserId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("TasksTaskId", "UsersUserId");
+
+                    b.HasIndex("UsersUserId");
+
+                    b.ToTable("TaskItemUser");
+                });
+
             modelBuilder.Entity("TeamUser", b =>
                 {
                     b.Property<Guid>("TeamsTeamId")
@@ -249,6 +267,21 @@ namespace KanbanWebAPI.Domain.Migrations
                         .IsRequired();
 
                     b.Navigation("Column");
+                });
+
+            modelBuilder.Entity("TaskItemUser", b =>
+                {
+                    b.HasOne("KanbanWebAPI.Domain.Entities.TaskItem", null)
+                        .WithMany()
+                        .HasForeignKey("TasksTaskId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("KanbanWebAPI.Domain.Entities.User", null)
+                        .WithMany()
+                        .HasForeignKey("UsersUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("TeamUser", b =>

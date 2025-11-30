@@ -14,7 +14,6 @@ internal class TaskItemRepositoryBase(AppDbContext context) : RepositoryBase<Tas
     public async Task<IEnumerable<TaskItem>> GetByColumnIdAsync(Guid columnId)
     {
         return await _context.Task
-            .Include(t => t.Users)
             .Where(t => t.ColumnId == columnId)
             .ToListAsync();
     }

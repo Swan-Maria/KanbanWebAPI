@@ -20,10 +20,6 @@ namespace KanbanWebAPI.Domain.Entities.Configurations
                 .WithMany(x => x.Tasks)
                 .HasForeignKey(x => x.ColumnId)
                 .OnDelete(DeleteBehavior.Cascade);
-
-            builder.HasMany(x => x.Users)
-                .WithMany(x => x.Tasks)
-                .UsingEntity(j => j.ToTable("TaskAssignment"));
         }
     }
 }
