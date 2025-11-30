@@ -5,10 +5,10 @@ The backend is written in ASP.NET Core 9 using Entity Framework and PostgreSQL. 
 ## Team Members
 | Member              | Responsibility                 |
 |---------------------|--------------------------------|
-| Maria Lebedeva      | Testing & Quality Assurance    |
-| Daria Burtseva      | Data Access Layer && Database  | 
-| Yevgeniy Zadorozhny | Bisness Logic Layer            |        
-| Ivan Nikolaev       | WebApi (Presentation Layer)    |       
+| Maria Lebedeva      | Unit Tests    |
+| Daria Burtseva      | Domain  | 
+| Yevgeniy Zadorozhny | Application|        
+| Ivan Nikolaev       | WebApi     |       
 ---
 ## Features
 - Authorization via Google OAuth 2.0
@@ -41,7 +41,6 @@ The project is implemented using a multi-layer architecture using Entity Framewo
 - `Membership` — user-team relationship with a role (Manager/Member)
 - `Board` — board
 - `Column` — column 
-- `Task` — task
-- `TaskAssignment` — task assignee
-- `TaskHistory` — change history
+- `TaskItem` — task item
+- `TaskAudit` — change history
 <!-- ![Kanban database entities](kanban_graph.jpg) -->
