@@ -13,9 +13,8 @@ The backend is written in ASP.NET Core 9 using Entity Framework and PostgreSQL. 
 ## Features
 - Authorization via Google OAuth 2.0
 - Team and member management
-- Board creation and automatic **Backlog** column
 - Task and assignee management
-- Task change history (`TaskHistory`)
+- Task change history (`TaskAudit`)
 - Swagger UI for API testing
 ---
 ## Technologies
