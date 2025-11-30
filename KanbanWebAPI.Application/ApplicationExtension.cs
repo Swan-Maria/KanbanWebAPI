@@ -1,5 +1,6 @@
 using KanbanWebAPI.Application.Interfaces.Services;
 using KanbanWebAPI.Application.Services;
+
 using Microsoft.Extensions.DependencyInjection;
 
 namespace KanbanWebAPI.Application;

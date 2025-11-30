@@ -1,8 +1,9 @@
 using AutoMapper;
+
 using KanbanWebAPI.Application.DTOs.Tasks;
 using KanbanWebAPI.Application.Interfaces.Services;
-using KanbanWebAPI.Domain.Repositories;
 using KanbanWebAPI.Domain.Entities;
+using KanbanWebAPI.Domain.Repositories;
 
 namespace KanbanWebAPI.Application.Services;
 

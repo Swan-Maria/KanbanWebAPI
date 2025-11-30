@@ -1,11 +1,12 @@
 using AutoMapper;
-using KanbanWebAPI.Domain.Entities;
-using KanbanWebAPI.Application.DTOs.Users;
-using KanbanWebAPI.Application.DTOs.Teams;
+
 using KanbanWebAPI.Application.DTOs.Boards;
 using KanbanWebAPI.Application.DTOs.Columns;
-using KanbanWebAPI.Application.DTOs.Tasks;
 using KanbanWebAPI.Application.DTOs.TaskAudits;
+using KanbanWebAPI.Application.DTOs.Tasks;
+using KanbanWebAPI.Application.DTOs.Teams;
+using KanbanWebAPI.Application.DTOs.Users;
+using KanbanWebAPI.Domain.Entities;
 
 namespace KanbanWebAPI.Application.Mapping;
 
