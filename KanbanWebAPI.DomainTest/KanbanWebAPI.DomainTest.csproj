@@ -1,35 +1,38 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-        <TargetFramework>net9.0</TargetFramework>
-        <LangVersion>latest</LangVersion>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
-        <IsPackable>false</IsPackable>
-    </PropertyGroup>
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
 
-    <ItemGroup>
-        <PackageReference Include="coverlet.collector" Version="6.0.2"/>
-        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.10" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="9.0.10"/>
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0"/>
-        <PackageReference Include="NUnit" Version="4.4.0" />
-        <PackageReference Include="NUnit.Analyzers" Version="4.4.0"/>
-        <PackageReference Include="NUnit3TestAdapter" Version="6.0.0-beta.2.1" />
-    </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="coverlet.collector" Version="6.0.2" />
+    
+    <!-- EF Core у тестах теж приводимо до 9.0.1 -->
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="9.0.1" />
 
-    <ItemGroup>
-        <Using Include="NUnit.Framework"/>
-    </ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
+    <PackageReference Include="NUnit" Version="4.4.0" />
+    <PackageReference Include="NUnit.Analyzers" Version="4.4.0" />
+    <PackageReference Include="NUnit3TestAdapter" Version="4.6.0" />
+  </ItemGroup>
 
-    <ItemGroup>
-        <ProjectReference Include="..\KanbanWebAPI.Domain\KanbanWebAPI.Domain.csproj"/>
-    </ItemGroup>
+  <ItemGroup>
+    <Using Include="NUnit.Framework" />
+  </ItemGroup>
 
-    <ItemGroup>
-        <None Update="TestBoards.json;TestColumns.json;TestTaskAudits.json;TestTaskItems.json;TestTeamMembers.json">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </None>
-    </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\KanbanWebAPI.Domain\KanbanWebAPI.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="TestBoards.json;TestColumns.json;TestTaskAudits.json;TestTaskItems.json;TestTeamMembers.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 
 </Project>
