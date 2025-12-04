@@ -9,9 +9,6 @@ using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// ------------------- SERVICES -------------------
-
-// Controllers
 builder.Services.AddControllers();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
@@ -20,8 +17,6 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 // Domain & Application
 builder.Services.RegisterDomain();
 builder.Services.AddApplicationLayer();
-
-// ------------------- AUTH (JWT) -------------------
 
 builder.Services
     .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -42,8 +37,6 @@ builder.Services
     });
 
 builder.Services.AddAuthorization();
-
-// ------------------- SWAGGER -------------------
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
@@ -78,8 +71,6 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
-// ------------------- PIPELINE -------------------
-
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -99,8 +90,6 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
-
-// ------------------- JWT SETTINGS -------------------
 
 public static class JwtSettings
 {
