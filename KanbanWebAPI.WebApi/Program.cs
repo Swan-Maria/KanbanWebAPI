@@ -14,7 +14,6 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseInMemoryDatabase("KanbanDb"));
 
-// Domain & Application
 builder.Services.RegisterDomain();
 builder.Services.AddApplicationLayer();
 
