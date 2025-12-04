@@ -27,7 +27,6 @@ public class BoardsController : ControllerBase
         _taskService = taskService;
     }
 
-    // DTO для повної дошки
     public class ColumnWithTasksDto
     {
         public Guid ColumnId { get; set; }
@@ -43,8 +42,6 @@ public class BoardsController : ControllerBase
         public Guid TeamId { get; set; }
         public List<ColumnWithTasksDto> Columns { get; set; } = new();
     }
-
-    // --- CRUD дошок ---
 
     [HttpGet("team/{teamId:guid}")]
     public async Task<ActionResult<IEnumerable<BoardDto>>> GetByTeam(Guid teamId)
@@ -86,8 +83,6 @@ public class BoardsController : ControllerBase
         await _boardService.DeleteAsync(boardId);
         return NoContent();
     }
-
-    // --- FULL VIEW дошки ---
 
     [HttpGet("{boardId:guid}/full")]
     public async Task<ActionResult<BoardFullDto>> GetBoardFull(Guid boardId)
