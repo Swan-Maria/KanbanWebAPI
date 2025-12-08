@@ -1,5 +1,3 @@
-using System.Text.Json;
-
 using AutoMapper;
 
 using KanbanWebAPI.Application.DTOs.Columns;
@@ -19,15 +17,6 @@ namespace KanbanWebAPI.ApplicationTest.Services
         private Mock<IColumnRepository> _mockRepo;
         private Mock<IMapper> _mockMapper;
         private ColumnService _service;
-
-        private static List<Column> LoadColumnsFromJson()
-        {
-            var jsonFilePath = Path.Combine(TestContext.CurrentContext.TestDirectory, "TestData", "TestColumns.json");
-            if (!File.Exists(jsonFilePath))
-                throw new FileNotFoundException($"JSON data file {jsonFilePath} not found");
-            var jsonString = File.ReadAllText(jsonFilePath);
-            return JsonSerializer.Deserialize<List<Column>>(jsonString) ?? new List<Column>();
-        }
 
         [SetUp]
         public void SetUp()
@@ -49,7 +38,7 @@ namespace KanbanWebAPI.ApplicationTest.Services
         public async Task GetByBoardAsync(string boardIdStr, int expectedCount)
         {
             var boardId = Guid.Parse(boardIdStr);
-            var columns = LoadColumnsFromJson().Where(c => c.BoardId == boardId).ToList();
+            var columns = TestDataLoader.LoadFromJson<Column>("TestColumns.json").Where(c => c.BoardId == boardId).ToList();
 
             _mockRepo.Setup(r => r.GetByBoardIdAsync(boardId)).ReturnsAsync(columns);
             _mockMapper.Setup(m => m.Map<IEnumerable<ColumnDto>>(It.IsAny<IEnumerable<Column>>()))
@@ -85,7 +74,7 @@ namespace KanbanWebAPI.ApplicationTest.Services
         {
             var columnId = Guid.Parse(columnIdStr);
             var dto = new UpdateColumnDto { ColumnName = "Updated Name" };
-            var column = LoadColumnsFromJson().FirstOrDefault(c => c.ColumnId == columnId);
+            var column = TestDataLoader.LoadFromJson<Column>("TestColumns.json").FirstOrDefault(c => c.ColumnId == columnId);
 
             _mockRepo.Setup(r => r.GetByIdAsync(columnId)).ReturnsAsync(column);
             if (column != null)

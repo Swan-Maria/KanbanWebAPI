@@ -1,12 +1,10 @@
-﻿using System.Text.Json;
-
-using KanbanWebAPI.Domain;
+﻿using KanbanWebAPI.Domain;
 using KanbanWebAPI.Domain.Entities;
 using KanbanWebAPI.Domain.Repositories;
 
 using Microsoft.EntityFrameworkCore;
 
-namespace KanbanWebAPI.DomainTest;
+namespace KanbanWebAPI.DomainTest.Services;
 
 [TestFixture]
 public class ColumnRepositoryBaseTest
@@ -18,19 +16,8 @@ public class ColumnRepositoryBaseTest
     private const string Board2IdString = "00000000-0000-0000-0000-000000000200";
     private const string NonExistentIdString = "FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF";
 
-    private static readonly List<Column> InitialColumns = LoadColumnsFromJson();
+    private static readonly List<Column> InitialColumns = TestDataLoader.LoadFromJson<Column>("TestColumns.json");
 
-    private static List<Column> LoadColumnsFromJson()
-    {
-        var jsonFilePath = Path.Combine(TestContext.CurrentContext.TestDirectory, "TestColumns.json");
-        if (!File.Exists(jsonFilePath))
-        {
-            throw new FileNotFoundException($"JSON data file {jsonFilePath} not found");
-        }
-
-        var jsonString = File.ReadAllText(jsonFilePath);
-        return JsonSerializer.Deserialize<List<Column>>(jsonString) ?? new List<Column>();
-    }
 
     [SetUp]
     public void Setup()

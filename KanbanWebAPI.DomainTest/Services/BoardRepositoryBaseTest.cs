@@ -1,12 +1,10 @@
-﻿using System.Text.Json;
-
-using KanbanWebAPI.Domain;
+﻿using KanbanWebAPI.Domain;
 using KanbanWebAPI.Domain.Entities;
 using KanbanWebAPI.Domain.Repositories;
 
 using Microsoft.EntityFrameworkCore;
 
-namespace KanbanWebAPI.DomainTest;
+namespace KanbanWebAPI.DomainTest.Services;
 
 [TestFixture]
 public class BoardRepositoryBaseTests
@@ -19,19 +17,7 @@ public class BoardRepositoryBaseTests
     private const string TeamBIdString = "00000000-0000-0000-0000-000000000002";
     private const string NonExistentIdString = "FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF";
 
-    private static readonly List<Board> InitialBoards = LoadBoardsFromJson();
-
-    private static List<Board> LoadBoardsFromJson()
-    {
-        var jsonFilePath = Path.Combine(TestContext.CurrentContext.TestDirectory, "TestBoards.json");
-        if (!File.Exists(jsonFilePath))
-        {
-            throw new FileNotFoundException($"JSON data file {jsonFilePath} not found");
-        }
-
-        var jsonString = File.ReadAllText(jsonFilePath);
-        return JsonSerializer.Deserialize<List<Board>>(jsonString) ?? new List<Board>();
-    }
+    private static readonly List<Board> InitialBoards = TestDataLoader.LoadFromJson<Board>("TestBoards.json");
 
     [SetUp]
     public void SetUp()
@@ -128,7 +114,7 @@ public class BoardRepositoryBaseTests
             await _boardRepositoryBase.CreateAsync(board!);
             var savedBoard = await _context.Board.FindAsync(board!.BoardId);
 
-            // Assert (1 assert)
+            // Assert
             Assert.That(savedBoard!.BoardName, Is.EqualTo(boardName),
                 "The saved board name should match the input name.");
         }

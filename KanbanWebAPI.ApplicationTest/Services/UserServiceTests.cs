@@ -19,16 +19,6 @@ namespace KanbanWebAPI.ApplicationTest.Services
         private Mock<IMapper> _mockMapper;
         private UserService _service;
 
-        private static List<User> LoadUsersFromJson()
-        {
-            var jsonFilePath = Path.Combine(TestContext.CurrentContext.TestDirectory, "TestData", "TestUsers.json");
-            if (!File.Exists(jsonFilePath))
-                throw new FileNotFoundException($"JSON data file {jsonFilePath} not found");
-
-            var jsonString = File.ReadAllText(jsonFilePath);
-            return JsonSerializer.Deserialize<List<User>>(jsonString) ?? new List<User>();
-        }
-
         [SetUp]
         public void SetUp()
         {
@@ -45,7 +35,7 @@ namespace KanbanWebAPI.ApplicationTest.Services
         public async Task GetByIdAsync(string userIdStr, bool exists)
         {
             var userId = Guid.Parse(userIdStr);
-            var user = LoadUsersFromJson().FirstOrDefault(u => u.UserId == userId);
+            var user = TestDataLoader.LoadFromJson<User>("TestUsers.json").FirstOrDefault(u => u.UserId == userId);
 
             _mockRepo.Setup(r => r.GetByIdAsync(userId)).ReturnsAsync(user);
             _mockMapper.Setup(m => m.Map<UserDto>(It.IsAny<User>()))
@@ -59,7 +49,7 @@ namespace KanbanWebAPI.ApplicationTest.Services
         [Test]
         public async Task GetAllAsync()
         {
-            var users = LoadUsersFromJson();
+            var users = TestDataLoader.LoadFromJson<User>("TestUsers.json");
 
             _mockRepo.Setup(r => r.GetAllAsync()).ReturnsAsync(users);
             _mockMapper.Setup(m => m.Map<IEnumerable<UserDto>>(It.IsAny<IEnumerable<User>>()))

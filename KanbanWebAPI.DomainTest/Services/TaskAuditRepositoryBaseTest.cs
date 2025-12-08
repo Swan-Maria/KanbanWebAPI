@@ -1,12 +1,10 @@
-﻿using System.Text.Json;
-
-using KanbanWebAPI.Domain;
+﻿using KanbanWebAPI.Domain;
 using KanbanWebAPI.Domain.Entities;
 using KanbanWebAPI.Domain.Repositories;
 
 using Microsoft.EntityFrameworkCore;
 
-namespace KanbanWebAPI.DomainTest;
+namespace KanbanWebAPI.DomainTest.Services;
 
 [TestFixture]
 public class TaskAuditRepositoryBaseTest
@@ -18,19 +16,8 @@ public class TaskAuditRepositoryBaseTest
     private const string Task2IdString = "00000000-0000-0000-0000-000000000200";
     private const string NonExistentIdString = "FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF";
 
-    private static readonly List<TaskAudit> InitialAudits = LoadAuditsFromJson();
+    private static readonly List<TaskAudit> InitialAudits = TestDataLoader.LoadFromJson<TaskAudit>("TestTaskAudits.json");
 
-    private static List<TaskAudit> LoadAuditsFromJson()
-    {
-        var jsonFilePath = Path.Combine(TestContext.CurrentContext.TestDirectory, "TestTaskAudits.json");
-        if (!File.Exists(jsonFilePath))
-        {
-            throw new FileNotFoundException($"JSON data file {jsonFilePath} not found");
-        }
-
-        var jsonString = File.ReadAllText(jsonFilePath);
-        return JsonSerializer.Deserialize<List<TaskAudit>>(jsonString) ?? new List<TaskAudit>();
-    }
 
     [SetUp]
     public void Setup()

@@ -19,15 +19,6 @@ namespace KanbanWebAPI.ApplicationTest.Services
         private Mock<IMapper> _mockMapper;
         private TeamService _service;
 
-        private static List<Team> LoadTeamsFromJson()
-        {
-            var jsonFilePath = Path.Combine(TestContext.CurrentContext.TestDirectory, "TestData", "TestTeams.json");
-            if (!File.Exists(jsonFilePath))
-                throw new FileNotFoundException($"JSON data file {jsonFilePath} not found");
-            var jsonString = File.ReadAllText(jsonFilePath);
-            return JsonSerializer.Deserialize<List<Team>>(jsonString) ?? new List<Team>();
-        }
-
         [SetUp]
         public void SetUp()
         {
@@ -46,7 +37,7 @@ namespace KanbanWebAPI.ApplicationTest.Services
         public async Task GetUserTeamsAsync(string userIdStr, int expectedCount)
         {
             var userId = Guid.Parse(userIdStr);
-            var teams = LoadTeamsFromJson().Where(t => t.Users.Any(u => u.UserId == userId)).ToList();
+            var teams = TestDataLoader.LoadFromJson<Team>("TestTeams.json").Where(t => t.Users.Any(u => u.UserId == userId)).ToList();
 
             _mockRepo.Setup(r => r.GetTeamsByUserAsync(userId)).ReturnsAsync(teams);
             _mockMapper.Setup(m => m.Map<IEnumerable<TeamDto>>(It.IsAny<IEnumerable<Team>>()))
@@ -81,7 +72,7 @@ namespace KanbanWebAPI.ApplicationTest.Services
         {
             var teamId = Guid.Parse(teamIdStr);
             var dto = new UpdateTeamDto { TeamName = "Updated Name" };
-            var team = LoadTeamsFromJson().FirstOrDefault(t => t.TeamId == teamId);
+            var team = TestDataLoader.LoadFromJson<Team>("TestTeams.json").FirstOrDefault(t => t.TeamId == teamId);
 
             _mockRepo.Setup(r => r.GetByIdAsync(teamId)).ReturnsAsync(team);
             if (team != null)

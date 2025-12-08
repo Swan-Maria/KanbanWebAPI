@@ -1,12 +1,10 @@
-﻿using System.Text.Json;
-
-using KanbanWebAPI.Domain;
+﻿using KanbanWebAPI.Domain;
 using KanbanWebAPI.Domain.Entities;
 using KanbanWebAPI.Domain.Repositories;
 
 using Microsoft.EntityFrameworkCore;
 
-namespace KanbanWebAPI.DomainTest;
+namespace KanbanWebAPI.DomainTest.Services;
 
 [TestFixture]
 public class TeamRepositoryBaseTest
@@ -19,19 +17,8 @@ public class TeamRepositoryBaseTest
     private const string NonExistentIdString = "FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF";
     private const string ExpectedTeamNameForAlice = "Development Team A";
 
-    private static readonly List<Team> InitialTeams = LoadTeamsFromJson();
+    private static readonly List<Team> InitialTeams = TestDataLoader.LoadFromJson<Team>("TestTeamUsers.json");
 
-    private static List<Team> LoadTeamsFromJson()
-    {
-        var jsonFilePath = Path.Combine(TestContext.CurrentContext.TestDirectory, "TestTeamMembers.json");
-        if (!File.Exists(jsonFilePath))
-        {
-            throw new FileNotFoundException($"JSON data file {jsonFilePath} not found");
-        }
-
-        var jsonString = File.ReadAllText(jsonFilePath);
-        return JsonSerializer.Deserialize<List<Team>>(jsonString) ?? new List<Team>();
-    }
 
     [SetUp]
     public void Setup()

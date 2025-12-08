@@ -19,15 +19,6 @@ namespace KanbanWebAPI.ApplicationTest.Services
         private Mock<IMapper> _mockMapper;
         private TaskService _service;
 
-        private static List<TaskItem> LoadTasksFromJson()
-        {
-            var jsonFilePath = Path.Combine(TestContext.CurrentContext.TestDirectory, "TestData", "TestTaskItems.json");
-            if (!File.Exists(jsonFilePath))
-                throw new FileNotFoundException($"JSON data file {jsonFilePath} not found");
-            var jsonString = File.ReadAllText(jsonFilePath);
-            return JsonSerializer.Deserialize<List<TaskItem>>(jsonString) ?? new List<TaskItem>();
-        }
-
         [SetUp]
         public void SetUp()
         {
@@ -38,7 +29,6 @@ namespace KanbanWebAPI.ApplicationTest.Services
 
 
         private const string GetByColumnAsyncMethodName = nameof(ITaskService.GetByColumnAsync);
-        private const string GetByIdAsyncMethodName = nameof(ITaskService.GetByIdAsync);
         private const string UpdateAsyncAsyncMethodName = nameof(ITaskService.GetByColumnAsync);
         private const string DeleteAsyncAsyncMethodName = nameof(ITaskService.CreateAsync);
 
@@ -49,7 +39,7 @@ namespace KanbanWebAPI.ApplicationTest.Services
         public async Task GetByColumnAsync(string columnIdStr, int expectedCount)
         {
             var columnId = Guid.Parse(columnIdStr);
-            var tasks = LoadTasksFromJson().Where(t => t.ColumnId == columnId).ToList();
+            var tasks = TestDataLoader.LoadFromJson<TaskItem>("TestTaskItems.json").Where(t => t.ColumnId == columnId).ToList();
 
             _mockRepo.Setup(r => r.GetByColumnIdAsync(columnId)).ReturnsAsync(tasks);
             _mockMapper.Setup(m => m.Map<IEnumerable<TaskDto>>(It.IsAny<IEnumerable<TaskItem>>()))
@@ -72,7 +62,7 @@ namespace KanbanWebAPI.ApplicationTest.Services
         public async Task GetByIdAsync(string taskIdStr, bool exists)
         {
             var taskId = Guid.Parse(taskIdStr);
-            var task = LoadTasksFromJson().FirstOrDefault(t => t.TaskId == taskId);
+            var task = TestDataLoader.LoadFromJson<TaskItem>("TestTaskItems.json").FirstOrDefault(t => t.TaskId == taskId);
 
             _mockRepo.Setup(r => r.GetByIdAsync(taskId)).ReturnsAsync(task);
             _mockMapper.Setup(m => m.Map<TaskDto>(It.IsAny<TaskItem>()))
@@ -107,7 +97,7 @@ namespace KanbanWebAPI.ApplicationTest.Services
         {
             var taskId = Guid.Parse(taskIdStr);
             var dto = new UpdateTaskDto { Title = "Updated Title" };
-            var task = LoadTasksFromJson().FirstOrDefault(t => t.TaskId == taskId);
+            var task = TestDataLoader.LoadFromJson<TaskItem>("TestTaskItems.json").FirstOrDefault(t => t.TaskId == taskId);
 
             _mockRepo.Setup(r => r.GetByIdAsync(taskId)).ReturnsAsync(task);
             if (task != null)

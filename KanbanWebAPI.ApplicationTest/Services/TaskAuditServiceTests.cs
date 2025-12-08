@@ -19,14 +19,6 @@ public class TaskAuditServiceTests
     private Mock<IMapper> _mockMapper;
     private TaskAuditService _service;
 
-    private static List<TaskAudit> LoadTaskAuditsFromJson()
-    {
-        var jsonFilePath = Path.Combine(TestContext.CurrentContext.TestDirectory, "TestData", "TestTaskAudits.json");
-        if (!File.Exists(jsonFilePath)) throw new FileNotFoundException($"JSON data file {jsonFilePath} not found");
-        var jsonString = File.ReadAllText(jsonFilePath);
-        return JsonSerializer.Deserialize<List<TaskAudit>>(jsonString) ?? new List<TaskAudit>();
-    }
-
     [SetUp]
     public void SetUp()
     {
@@ -44,7 +36,7 @@ public class TaskAuditServiceTests
     public async Task GetByTaskAsync(string taskIdStr, int expectedCount)
     {
         var taskId = Guid.Parse(taskIdStr);
-        var audits = LoadTaskAuditsFromJson().Where(a => a.TaskItemId == taskId).ToList();
+        var audits = TestDataLoader.LoadFromJson<TaskAudit>("TestTaskAudits.json").Where(a => a.TaskItemId == taskId).ToList();
         _mockRepo.Setup(r => r.GetByTaskIdAsync(taskId)).ReturnsAsync(audits);
         _mockMapper.Setup(m => m.Map<IEnumerable<TaskAuditDto>>(It.IsAny<IEnumerable<TaskAudit>>()))
             .Returns((IEnumerable<TaskAudit> t) =>

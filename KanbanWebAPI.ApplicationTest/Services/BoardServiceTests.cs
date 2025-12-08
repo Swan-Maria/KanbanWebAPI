@@ -1,5 +1,3 @@
-using System.Text.Json;
-
 using AutoMapper;
 
 using KanbanWebAPI.Application.DTOs.Boards;
@@ -19,16 +17,6 @@ public class BoardServiceTests
     private Mock<IBoardRepository> _mockRepo;
     private Mock<IMapper> _mockMapper;
     private BoardService _service;
-
-    private static List<Board> LoadBoardsFromJson()
-    {
-        var jsonFilePath = Path.Combine(TestContext.CurrentContext.TestDirectory, "TestData", "TestBoards.json");
-        if (!File.Exists(jsonFilePath))
-            throw new FileNotFoundException($"JSON data file {jsonFilePath} not found");
-
-        var jsonString = File.ReadAllText(jsonFilePath);
-        return JsonSerializer.Deserialize<List<Board>>(jsonString) ?? new List<Board>();
-    }
 
     [SetUp]
     public void SetUp()
@@ -51,7 +39,7 @@ public class BoardServiceTests
     public async Task GetByIdAsync(string boardIdStr, bool exists)
     {
         var boardId = Guid.Parse(boardIdStr);
-        var board = LoadBoardsFromJson().FirstOrDefault(b => b.BoardId == boardId);
+        var board = TestDataLoader.LoadFromJson<Board>("TestBoards.json").FirstOrDefault(b => b.BoardId == boardId);
 
         _mockRepo.Setup(r => r.GetByIdAsync(boardId)).ReturnsAsync(board);
         _mockMapper.Setup(m => m.Map<BoardDto>(It.IsAny<Board>()))
@@ -70,7 +58,7 @@ public class BoardServiceTests
     public async Task GetByTeamAsync(string teamIdStr, int expectedCount)
     {
         var teamId = Guid.Parse(teamIdStr);
-        var boards = LoadBoardsFromJson().Where(b => b.TeamId == teamId).ToList();
+        var boards = TestDataLoader.LoadFromJson<Board>("TestBoards.json").Where(b => b.TeamId == teamId).ToList();
 
         _mockRepo.Setup(r => r.GetByTeamIdAsync(teamId)).ReturnsAsync(boards);
         _mockMapper.Setup(m => m.Map<IEnumerable<BoardDto>>(It.IsAny<IEnumerable<Board>>()))
@@ -121,7 +109,7 @@ public class BoardServiceTests
     {
         var boardId = Guid.Parse(boardIdStr);
         var dto = new UpdateBoardDto { BoardName = "Updated Name" };
-        var board = LoadBoardsFromJson().FirstOrDefault(b => b.BoardId == boardId);
+        var board = TestDataLoader.LoadFromJson<Board>("TestBoards.json").FirstOrDefault(b => b.BoardId == boardId);
 
         _mockRepo.Setup(r => r.GetByIdAsync(boardId)).ReturnsAsync(board);
         if (board != null)
