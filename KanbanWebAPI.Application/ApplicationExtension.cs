@@ -1,7 +1,9 @@
 using AutoMapper;
-using KanbanWebAPI.Application.Mapping;
+
 using KanbanWebAPI.Application.Interfaces.Services;
+using KanbanWebAPI.Application.Mapping;
 using KanbanWebAPI.Application.Services;
+
 using Microsoft.Extensions.DependencyInjection;
 
 namespace KanbanWebAPI.Application

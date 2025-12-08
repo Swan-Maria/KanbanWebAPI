@@ -1,7 +1,9 @@
 using System.Security.Claims;
 using System.Text;
+
 using KanbanWebAPI.Application;
 using KanbanWebAPI.Domain;
+
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;

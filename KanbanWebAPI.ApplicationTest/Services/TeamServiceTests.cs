@@ -89,7 +89,7 @@ namespace KanbanWebAPI.ApplicationTest.Services
 
         [Test]
         [TestCase("11111111-1111-1111-1111-111111111111", TestName = DeleteAsyncMethodName + " With existing team ID")]
-        [TestCase("22222222-2222-2222-2222-222222222222", TestName = DeleteAsyncMethodName + " With non-existing team ID")]
+        [TestCase("FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF", TestName = DeleteAsyncMethodName + " With non-existing team ID")]
         public async Task DeleteAsync(string teamIdStr)
         {
             var teamId = Guid.Parse(teamIdStr);

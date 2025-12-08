@@ -1,6 +1,8 @@
 using System.Security.Claims;
+
 using KanbanWebAPI.Application.DTOs.Teams;
 using KanbanWebAPI.Application.Interfaces.Services;
+
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
